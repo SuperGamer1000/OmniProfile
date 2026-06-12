@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniProfile</title>
+    <!-- Favicon as an image -->
+    <link rel="icon" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+    <!-- Page Loader -->
+    <div class="loader-wrapper" id="page-loader">
+        <div class="loader">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <nav class="site-nav">
+        <a href="/" class="logo" style="display: flex; align-items: center; gap: 8px;">
+            <img src="logo.png" alt="Logo" style="height: 32px; width: 32px; border-radius: 6px;">
+            OmniProfile
+        </a>
+        
+        <label class="hamburger">
+          <input type="checkbox" id="mobile-menu-toggle">
+          <svg viewBox="0 0 32 32">
+            <path class="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
+            <path class="line" d="M7 16 27 16"></path>
+          </svg>
+        </label>
+
+        <div class="nav-links align-center" id="nav-links">
+            <a href="/">Home</a>
+            <a href="color-psychology.html">Color Psychology</a>
+            <label class="switch" title="Toggle Night Mode">
+                <input type="checkbox" id="theme-toggle">
+                <div class="slider round">
+                    <div class="sun-moon">
+                        <div id="moon-dot-1" class="moon-dot"></div>
+                        <div id="moon-dot-2" class="moon-dot"></div>
+                        <div id="moon-dot-3" class="moon-dot"></div>
+                        <div id="light-ray-1"></div>
+                        <div id="light-ray-2"></div>
+                        <div id="light-ray-3"></div>
+                    </div>
+                    <div class="stars">
+                        <div id="star-1" class="star"></div>
+                        <div id="star-2" class="star"></div>
+                        <div id="star-3" class="star"></div>
+                        <div id="star-4" class="star"></div>
+                    </div>
+                    <div id="cloud-1" class="cloud-light"></div>
+                    <div id="cloud-2" class="cloud-light"></div>
+                    <div id="cloud-3" class="cloud-light"></div>
+                    <div id="cloud-4" class="cloud-dark"></div>
+                    <div id="cloud-5" class="cloud-dark"></div>
+                    <div id="cloud-6" class="cloud-dark"></div>
+                </div>
+            </label>
+        </div>
+    </nav>
+
+    <div class="app-wrapper" style="max-width: 1100px;">
+        <div class="main-card page-card" style="flex-direction: column;">
+            <div class="header-text text-xl" style="font-size: 2.5rem; text-transform: uppercase;">Color Psychology</div>
+            <p class="text-center text-muted mb-1">Discover what your profile picture color says about your brand.</p>
+            
+            <div class="infographic-container mt-4">
+                <!-- Left Column -->
+                <div class="info-col info-left">
+                    <div class="info-card card-green">
+                        <h3 class="text-lg fw-bold" style="text-transform: uppercase;">Green</h3>
+                        <p class="text-sm"><strong>Positive attributes:</strong> positive, nature, wealth</p>
+                        <p class="text-sm"><strong>Negative attributes:</strong> sickness, envy, immaturity</p>
+                    </div>
+                    <div class="info-card card-blue">
+                        <h3 class="text-lg fw-bold" style="text-transform: uppercase;">Blue</h3>
+                        <p class="text-sm"><strong>Positive attributes:</strong> calm, reliable, peace</p>
+                        <p class="text-sm"><strong>Negative attributes:</strong> coldness, unemotional, sadness</p>
+                    </div>
+                    <div class="info-card card-purple">
+                        <h3 class="text-lg fw-bold" style="text-transform: uppercase;">Purple</h3>
+                        <p class="text-sm"><strong>Positive attributes:</strong> royalty, mystical, creativity</p>
+                        <p class="text-sm"><strong>Negative attributes:</strong> arrogant, entitlement, pompous</p>
+                    </div>
+                    <div class="info-card card-black">
+                        <h3 class="text-lg fw-bold" style="text-transform: uppercase;">Black</h3>
+                        <p class="text-sm"><strong>Positive attributes:</strong> mysterious, sophisticated, security</p>
+                        <p class="text-sm"><strong>Negative attributes:</strong> intimidating, unapproachable, heavy</p>
+                    </div>
+                </div>
+
+                <!-- Center Graphic -->
+                <div class="info-center">
+                    <div class="ring-wrapper">
+                        <div class="color-ring"></div>
+                        <!-- Inner mask to create the "donut" ring effect -->
+                        <div class="ring-inner"></div>
+                        <!-- Gap lines -->
+                        <div class="gap-line gap-1"></div>
+                        <div class="gap-line gap-2"></div>
+                        <div class="gap-line gap-3"></div>
+                        <div class="gap-line gap-4"></div>
+                        <!-- Brain Icon -->
+                        <div class="brain-icon-wrapper">
+                            <img src="brain-line-art.png?v=3" class="brain-svg" alt="Brain Line Art">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="info-col info-right">
+                    <div class="info-card card-yellow">
+                        <h3 class="text-lg fw-bold" style="text-transform: uppercase;">Yellow</h3>
+                        <p class="text-sm"><strong>Positive attributes:</strong> eye-catching, sunny, light</p>
+                        <p class="text-sm"><strong>Negative attributes:</strong> cowardice, abrasive, irrational</p>
+                    </div>
+                    <div class="info-card card-orange">
+                        <h3 class="text-lg fw-bold" style="text-transform: uppercase;">Orange</h3>
+                        <p class="text-sm"><strong>Positive attributes:</strong> warmth, energetic, bold</p>
+                        <p class="text-sm"><strong>Negative attributes:</strong> frustration, loud, caution</p>
+                    </div>
+                    <div class="info-card card-red">
+                        <h3 class="text-lg fw-bold" style="text-transform: uppercase;">Red</h3>
+                        <p class="text-sm"><strong>Positive attributes:</strong> passion, exciting, action</p>
+                        <p class="text-sm"><strong>Negative attributes:</strong> aggressive, angry, negative</p>
+                    </div>
+                    <div class="info-card card-gray">
+                        <h3 class="text-lg fw-bold" style="text-transform: uppercase;">Gray</h3>
+                        <p class="text-sm"><strong>Positive attributes:</strong> neutral, mature, quiet</p>
+                        <p class="text-sm"><strong>Negative attributes:</strong> drab, non-emotional, depressing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 OmniProfile. Built for Creators. <span style="margin: 0 10px;">|</span> <a href="https://www.instagram.com/pxdproject/" target="_blank">Our Instagram</a></p>
+        <p class="mt-1"><a href="privacy-policy.html">Privacy Policy</a></p>
+    </footer>
+
+    <script src="theme.js"></script>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniProfile</title>
+    <!-- Favicon as an image -->
+    <link rel="icon" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css?v=4">
+    <!-- Theme script runs early to prevent flash -->
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+        }
+    </script>
+</head>
+<body class="">
+    <!-- Page Loader -->
+    <div class="loader-wrapper" id="page-loader">
+        <div class="loader">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <nav class="site-nav">
+        <a href="/" class="logo" style="display: flex; align-items: center; gap: 8px;">
+            <img src="logo.png" alt="Logo" style="height: 32px; width: 32px; border-radius: 6px;">
+            OmniProfile
+        </a>
+        
+        <label class="hamburger">
+          <input type="checkbox" id="mobile-menu-toggle">
+          <svg viewBox="0 0 32 32">
+            <path class="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
+            <path class="line" d="M7 16 27 16"></path>
+          </svg>
+        </label>
+
+        <div class="nav-links align-center" id="nav-links">
+            <a href="/">Home</a>
+            <a href="color-psychology.html">Color Psychology</a>
+            <label class="switch" title="Toggle Night Mode">
+                <input type="checkbox" id="theme-toggle">
+                <div class="slider round">
+                    <div class="sun-moon">
+                        <div id="moon-dot-1" class="moon-dot"></div>
+                        <div id="moon-dot-2" class="moon-dot"></div>
+                        <div id="moon-dot-3" class="moon-dot"></div>
+                        <div id="light-ray-1"></div>
+                        <div id="light-ray-2"></div>
+                        <div id="light-ray-3"></div>
+                    </div>
+                    <div class="stars">
+                        <div id="star-1" class="star"></div>
+                        <div id="star-2" class="star"></div>
+                        <div id="star-3" class="star"></div>
+                        <div id="star-4" class="star"></div>
+                    </div>
+                    <div id="cloud-1" class="cloud-light"></div>
+                    <div id="cloud-2" class="cloud-light"></div>
+                    <div id="cloud-3" class="cloud-light"></div>
+                    <div id="cloud-4" class="cloud-dark"></div>
+                    <div id="cloud-5" class="cloud-dark"></div>
+                    <div id="cloud-6" class="cloud-dark"></div>
+                </div>
+            </label>
+        </div>
+    </nav>
+
+    <div class="app-wrapper">
+        <div class="main-card">
+            
+            <!-- LEFT COLUMN -->
+            <div class="left-col">
+                <div class="header-text">Upload & preview</div>
+                
+                <div class="top-buttons">
+                    <button id="btn-upload" class="btn-outline">Upload photo</button>
+                    <input type="file" id="pfp-upload" class="hidden" accept="image/png, image/jpeg, image/webp">
+                </div>
+                
+                <!-- Cropper Wrapper -->
+                <div class="cropper-wrapper">
+                    <div class="cropper-container">
+                        <img id="image-to-crop" src="" alt="">
+                        <div class="circle-mask"></div>
+                    </div>
+                </div>
+                
+                <!-- Sliders -->
+                <div class="sliders">
+                    <div class="slider-row">
+                        <div class="slider-labels">
+                            <label>Zoom</label>
+                            <span id="zoom-val">100%</span>
+                        </div>
+                        <input type="range" id="zoom-slider" min="0.1" max="3" step="0.01" value="1">
+                    </div>
+
+                </div>
+
+                <!-- Inputs -->
+                <div class="user-inputs">
+                    <input type="text" id="handle" placeholder="Handle (@testprofilepicture)">
+                    <input type="text" id="displayName" placeholder="Display Name">
+                    <input type="text" id="niche" placeholder="Your Niche (e.g. Creator)">
+                    <textarea id="bio" placeholder="Your Bio"></textarea>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div class="right-col">
+                <!-- Platform Tabs -->
+                <div class="platform-tabs">
+                    <button class="tab active" data-platform="tiktok">
+                        <svg viewBox="0 0 24 24" width="24" height="24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 15.68a6.32 6.32 0 0 0 6.31 6.32 6.32 6.32 0 0 0 6.31-6.31V8.62a8.31 8.31 0 0 0 4.38 1.25V6.44a5.13 5.13 0 0 1-2.41-.75z" fill="currentColor"/></svg>
+                    </button>
+                    <button class="tab" data-platform="instagram">
+                        <svg viewBox="0 0 24 24" width="24" height="24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2zm-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.4 5.6 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.6 18.4 4 16.4 4H7.6zm9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25zM12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z" fill="currentColor"/></svg>
+                    </button>
+                    <button class="tab" data-platform="linkedin">
+                        <svg viewBox="0 0 24 24" width="24" height="24"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v14h5v-14zm7.982 0h-4.968v14h4.969v-7.396c0-1.936.366-3.818 2.766-3.818 2.366 0 2.4 2.22 2.4 3.943v7.271h4.969v-7.98c0-4.062-1.875-5.917-5.266-5.917-2.072 0-3.328.988-3.87 2.062v-2.165z" fill="currentColor"/></svg>
+                    </button>
+                    <button class="tab" data-platform="twitter">
+                        <svg viewBox="0 0 24 24" width="24" height="24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg>
+                    </button>
+                    <button class="tab" data-platform="whatsapp" title="WhatsApp">
+                        <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.12.553 4.108 1.523 5.864L.014 24l6.347-1.657A11.967 11.967 0 0012.031 24c6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.896 17.15c-.172.483-.984.928-1.428.966-.41.035-1.002.128-3.082-.733-2.52-1.044-4.144-3.616-4.269-3.784-.124-.167-1.018-1.353-1.018-2.58s.642-1.821.874-2.072c.231-.252.502-.315.669-.315.167 0 .333 0 .478.006.155.007.362-.058.566.435.216.518.73 1.782.796 1.916.066.134.11.291.026.458-.083.167-.125.271-.25.405-.125.134-.265.295-.377.404-.125.123-.257.26-.115.506.142.246.633 1.047 1.36 1.696.936.837 1.722 1.096 1.97 1.228.247.134.391.11.536-.057.145-.167.625-.731.792-.982.167-.251.334-.209.56-.125.226.084 1.431.674 1.677.797.246.123.411.184.471.287.06.103.06.596-.112 1.079z" fill="currentColor"/></svg>
+                    </button>
+                    <button class="tab" data-platform="telegram" title="Telegram">
+                        <svg viewBox="0 0 24 24" width="24" height="24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.888-.662 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" fill="currentColor"/></svg>
+                    </button>
+                    <button class="tab" data-platform="viber" title="Viber">
+                        <svg viewBox="0 0 24 24" width="24" height="24"><path d="M21.1 19.34c-.38.74-.95 1.24-1.72 1.5-.77.26-1.54.26-2.31 0-1.83-.58-3.66-1.42-5.46-2.53-2.34-1.44-4.52-3.13-6.52-5.06C3.12 11.36 1.48 9.21.57 6.8c-.37-.96-.46-1.94-.28-2.93.18-.99.64-1.87 1.38-2.65C2.6 0 4 .1 5 1.07c.88.85 1.58 1.87 2.1 3.06.31.71.39 1.44.23 2.18-.16.74-.53 1.4-1.1 1.98l-1.38 1.36c.64 1.17 1.43 2.3 2.37 3.37.94 1.07 2.02 2.05 3.24 2.94l1.37-1.38c.62-.64 1.33-1.07 2.12-1.29.79-.22 1.58-.16 2.35.19 1.25.56 2.33 1.3 3.25 2.23.99 1.02 1.08 2.45.19 3.53zm-3.23-8.86c0-3.32-2.58-6.02-5.75-6.02V2.42c4.27 0 7.75 3.63 7.75 8.06h-2zm-2.75 0c0-1.74-1.35-3.16-3-3.16V5.28c2.76 0 5 2.34 5 5.22h-2zm-2.75 0c0-.16-.13-.3-.3-.3v-1.7c1.06 0 1.92.9 1.92 2h-1.62z" fill="currentColor"/></svg>
+                    </button>
+                    <button class="tab" data-platform="youtube" title="YouTube">
+                        <svg viewBox="0 0 24 24" width="24" height="24"><path d="M21.582 6.186a2.506 2.506 0 0 0-1.762-1.766C18.265 4 12 4 12 4s-6.265 0-7.82.42a2.505 2.505 0 0 0-1.762 1.766C2 7.74 2 12 2 12s0 4.26.418 5.814a2.506 2.506 0 0 0 1.762 1.766C5.735 20 12 20 12 20s6.265 0 7.82-.42a2.505 2.505 0 0 0 1.762-1.766C22 16.26 22 12 22 12s0-4.26-.418-5.814zM9.996 15.005l.005-6 5.207 3.005-5.212 2.995z" fill="currentColor"/></svg>
+                    </button>
+                    <button class="tab" data-platform="twitch" title="Twitch">
+                        <svg viewBox="0 0 24 24" width="24" height="24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z" fill="currentColor"/></svg>
+                    </button>
+                    <button class="tab" data-platform="pinterest" title="Pinterest">
+                        <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.951-7.252 4.168 0 7.41 2.967 7.41 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.624 0 12.017 0z" fill="currentColor"/></svg>
+                    </button>
+                </div>
+
+                <div class="mockups-viewport">
+                    
+                    <!-- TikTok Mockup -->
+                    <div class="mockup tiktok active" id="mockup-tiktok">
+                        <div class="mockup-header" style="background:#000000; color:white;">
+                            <span class="mockup-title">TikTok</span>
+                            <span class="dots">...</span>
+                        </div>
+                        <div class="mockup-body">
+                            <div class="tk-profile">
+                                <div class="avatar mockup-avatar" style="width: 100px; height: 100px;"></div>
+                                <h3 class="mockup-handle mt-3 text-lg">@testprofilepicture</h3>
+                                <div class="tk-stats">
+                                    <span><strong>0</strong> Following</span>
+                                    <span><strong>12.4K</strong> Followers</span>
+                                    <span><strong>1.4M</strong> Likes</span>
+                                </div>
+                                <div class="mockup-bio mt-2 text-sm text-center">Your Bio</div>
+                                <div class="mockup-niche mt-1 text-sm text-blue fw-bold">Creator</div>
+                                <button class="btn-solid btn-follow mt-3">Follow</button>
+                            </div>
+                            <div class="tk-grid mt-4">
+                                <div class="grid-box"></div><div class="grid-box"></div><div class="grid-box"></div>
+                                <div class="grid-box"></div><div class="grid-box"></div><div class="grid-box"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Instagram Mockup -->
+                    <div class="mockup instagram" id="mockup-instagram">
+                        <div class="mockup-header" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color:white;">
+                            <span class="mockup-title fw-bold">Instagram</span>
+                            <span class="dots">...</span>
+                        </div>
+                        <div class="mockup-body">
+                            <div class="ig-profile">
+                                <div class="avatar mockup-avatar" style="width: 80px; height: 80px;"></div>
+                                <div class="ig-stats">
+                                    <div><strong>10</strong><span>Posts</span></div>
+                                    <div><strong>12.4K</strong><span>Followers</span></div>
+                                    <div><strong>100</strong><span>Following</span></div>
+                                </div>
+                            </div>
+                            <div class="ig-bio-section mt-3">
+                                <h4 class="mockup-display-name text-md">Display Name</h4>
+                                <div class="mockup-niche text-sm text-muted">Creator</div>
+                                <p class="mockup-bio text-sm mt-1">Your Bio</p>
+                            </div>
+                            <div class="tk-grid mt-4">
+                                <div class="grid-box"></div><div class="grid-box"></div><div class="grid-box"></div>
+                                <div class="grid-box"></div><div class="grid-box"></div><div class="grid-box"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LinkedIn Mockup -->
+                    <div class="mockup linkedin" id="mockup-linkedin">
+                        <div class="mockup-header" style="background:#0a66c2; color:white;">
+                            <span class="mockup-title">LinkedIn</span>
+                            <span class="dots">...</span>
+                        </div>
+                        <div class="li-banner"></div>
+                        <div class="mockup-body">
+                            <div class="li-profile-header">
+                                <div class="avatar mockup-avatar li-avatar"></div>
+                            </div>
+                            <h3 class="mockup-display-name text-xl mt-3">Display Name</h3>
+                            <p class="mockup-bio text-md mt-1">Your Bio</p>
+                            <p class="mockup-niche text-sm text-muted mt-1">Creator</p>
+                            <p class="text-sm text-muted mt-1">San Francisco, CA</p>
+                            <div class="mt-3">
+                                <button class="btn-solid btn-li">Connect</button>
+                                <button class="btn-outline btn-li-outline">Message</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Twitter Mockup -->
+                    <div class="mockup twitter" id="mockup-twitter">
+                        <div class="mockup-header" style="background:#000000; color:white;">
+                            <span class="mockup-title">X</span>
+                            <span class="dots">...</span>
+                        </div>
+                        <div class="tw-banner"></div>
+                        <div class="mockup-body">
+                            <div class="tw-profile-header">
+                                <div class="avatar mockup-avatar tw-avatar"></div>
+                                <button class="btn-solid btn-tw">Follow</button>
+                            </div>
+                            <h3 class="mockup-display-name text-xl mt-3">Display Name</h3>
+                            <p class="mockup-handle text-md text-muted mt-1">@testprofilepicture</p>
+                            <p class="mockup-bio text-md mt-2">Your Bio</p>
+                            <p class="mockup-niche text-sm text-blue mt-1">#Creator</p>
+                            <div class="tw-stats mt-2">
+                                <span><strong>100</strong> <span class="text-muted">Following</span></span>
+                                <span style="margin-left:15px;"><strong>12.4K</strong> <span class="text-muted">Followers</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp Mockup -->
+                    <div class="mockup whatsapp wa-mockup" id="mockup-whatsapp">
+                        <div class="mockup-header" style="background:#075E54; color:white;">
+                            <span class="mockup-title">WhatsApp</span>
+                        </div>
+                        <div class="wa-card">
+                            <div class="avatar mockup-avatar" style="width: 150px; height: 150px; margin: 0 auto;"></div>
+                        </div>
+                        <div class="wa-section">
+                            <div class="wa-label">Name</div>
+                            <div class="mockup-display-name text-lg">Display Name</div>
+                        </div>
+                        <div class="wa-section">
+                            <div class="wa-label">About</div>
+                            <div class="mockup-bio text-md">Your Bio</div>
+                        </div>
+                    </div>
+
+                    <!-- Telegram Mockup -->
+                    <div class="mockup telegram" id="mockup-telegram">
+                        <div class="mockup-header" style="background:#0088cc; color:white;">
+                            <span class="mockup-title">Telegram</span>
+                        </div>
+                        <div class="tg-header">
+                            <div class="avatar mockup-avatar" style="width: 100px; height: 100px; margin: 0 auto;"></div>
+                            <h3 class="mockup-display-name mt-3 text-xl">Display Name</h3>
+                            <div style="color: #0088cc;" class="mt-1 text-sm">last seen recently</div>
+                        </div>
+                        <div class="tg-section">
+                            <div class="tg-label">Bio</div>
+                            <div class="mockup-bio text-md">Your Bio</div>
+                        </div>
+                        <div class="tg-section">
+                            <div class="tg-label">Username</div>
+                            <div class="mockup-handle text-md">@testprofilepicture</div>
+                        </div>
+                    </div>
+
+                    <!-- Viber Mockup -->
+                    <div class="mockup viber" id="mockup-viber">
+                        <div class="mockup-header" style="background:#7360f2; color:white;">
+                            <span class="mockup-title">Viber</span>
+                        </div>
+                        <div class="vb-header">
+                            <div class="avatar mockup-avatar" style="width: 120px; height: 120px; margin: 0 auto;"></div>
+                            <h3 class="mockup-display-name mt-4 text-xl">Display Name</h3>
+                            <div class="mockup-handle mt-1 text-muted text-md">@testprofilepicture</div>
+                            <div class="mockup-bio mt-3 text-md text-muted" style="font-style: italic;">Your Bio</div>
+                        </div>
+                    </div>
+
+                    <!-- YouTube Mockup -->
+                    <div class="mockup youtube" id="mockup-youtube">
+                        <div class="mockup-header" style="background:#FF0000; color:white;">
+                            <span class="mockup-title">YouTube</span>
+                        </div>
+                        <div class="yt-banner" style="height: 100px; background: #e5e5e5;"></div>
+                        <div class="mockup-body" style="text-align: center;">
+                            <div class="avatar mockup-avatar yt-avatar" style="width: 80px; height: 80px; margin: -40px auto 10px auto; border: 4px solid var(--card-bg);"></div>
+                            <h3 class="mockup-display-name mt-2 text-xl fw-bold">Display Name</h3>
+                            <div class="mockup-handle mt-1 text-muted text-sm">@testprofilepicture ‧ 12.4K subscribers ‧ 100 videos</div>
+                            <div class="mockup-bio mt-3 text-sm" style="max-width: 90%; margin: 10px auto; color: var(--text-main);">Your Bio</div>
+                            <button class="btn-solid btn-yt mt-3" style="background:var(--text-main); color:var(--card-bg); border-radius:20px; padding: 10px 24px; font-weight: bold; width: auto; display: inline-block;">Subscribe</button>
+                        </div>
+                    </div>
+
+                    <!-- Twitch Mockup -->
+                    <div class="mockup twitch" id="mockup-twitch">
+                        <div class="mockup-header" style="background:#9146FF; color:white;">
+                            <span class="mockup-title">Twitch</span>
+                        </div>
+                        <div class="twch-banner" style="height: 80px; background: #6441a5;"></div>
+                        <div class="mockup-body" style="position: relative;">
+                            <div class="twch-profile-header" style="display:flex; align-items:flex-end; padding-top: 10px;">
+                                <div class="avatar mockup-avatar twch-avatar" style="width: 80px; height: 80px; margin-top:-40px; border: 4px solid var(--card-bg);"></div>
+                                <div style="margin-left: 15px; margin-bottom: 5px;">
+                                    <h3 class="mockup-display-name text-xl fw-bold">Display Name</h3>
+                                    <p class="mockup-handle text-sm" style="color: #9146FF;">12.4K followers</p>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <button class="btn-solid btn-twch" style="background:#9146FF; color:white; padding: 8px 12px; border-radius: 6px; width:100%; font-weight: bold;">Follow</button>
+                            </div>
+                            <div class="mockup-bio text-md mt-3">Your Bio</div>
+                        </div>
+                    </div>
+
+                    <!-- Pinterest Mockup -->
+                    <div class="mockup pinterest" id="mockup-pinterest">
+                        <div class="mockup-header" style="background:#E60023; color:white;">
+                            <span class="mockup-title">Pinterest</span>
+                        </div>
+                        <div class="mockup-body" style="text-align: center; padding-top: 20px;">
+                            <div class="avatar mockup-avatar pin-avatar" style="width: 120px; height: 120px; margin: 0 auto; border-radius: 50%;"></div>
+                            <h3 class="mockup-display-name mt-3 text-xl fw-bold">Display Name</h3>
+                            <div class="mockup-handle mt-1 text-muted text-sm">@testprofilepicture</div>
+                            <div class="mockup-bio mt-3 text-sm" style="max-width: 85%; margin: 10px auto;">Your Bio</div>
+                            <div class="pin-stats mt-2" style="font-size: 14px; font-weight: bold;">
+                                <span>12.4K followers</span> · <span>100 following</span>
+                            </div>
+                            <div class="mt-4" style="display: flex; gap: 10px; justify-content: center;">
+                                <button class="btn-solid btn-pin" style="background:#efefef; color:#111; border-radius:24px; padding: 10px 20px; font-weight: bold; width: auto;">Share</button>
+                                <button class="btn-solid btn-pin" style="background:#E60023; color:white; border-radius:24px; padding: 10px 20px; font-weight: bold; width: auto;">Follow</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <button id="btn-download">Download your mock up</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="site-footer">
+        <p>&copy; 2026 OmniProfile. Built for Creators. <span style="margin: 0 10px;">|</span> <a href="https://www.instagram.com/pxdproject/" target="_blank">Our Instagram</a></p>
+        <p class="mt-1"><a href="privacy-policy.html">Privacy Policy</a></p>
+    </footer>
+
+    <!-- Premium Activation Modal -->
+    <div id="premium-modal" class="modal-wrapper hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="text-xl fw-bold"><span style="margin-right:8px;">👑</span> Premium Feature</h3>
+                <button id="close-modal" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body mt-3">
+                <p class="text-md text-muted">To download high-quality mockups, please enter your activation code.</p>
+                <div class="premium-input-group mt-4" style="display: flex; flex-direction: column; gap: 10px;">
+                    <input type="text" id="activation-code" placeholder="Enter code" style="padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-app); color: var(--text-main);">
+                    <button id="btn-unlock" class="btn-solid" style="background-color: #f59e0b; color: white;">Unlock Download</button>
+                </div>
+                <p id="unlock-message" class="text-sm mt-3 hidden text-center"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden canvas for export -->
+    <canvas id="export-canvas" width="500" height="500" class="hidden"></canvas>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+    <script src="theme.js"></script>
+    <script>
+        // Apply theme immediately if script ran late
+        if (localStorage.getItem('theme') === 'dark' && !document.body.classList.contains('dark-mode')) {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>
