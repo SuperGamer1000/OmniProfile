@@ -176,8 +176,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnUnlock) {
         btnUnlock.addEventListener('click', () => {
             const code = activationInput.value.trim();
-            // Validates pattern 0x followed by exactly 6 numbers (e.g. 0x000001)
-            if (/^0x\d{6}$/i.test(code)) {
+            // Validates pattern of exactly 6 numbers
+            if (/^\d{6}$/i.test(code)) {
                 isUnlocked = true;
                 unlockMessage.textContent = '✅ Premium unlocked successfully!';
                 unlockMessage.classList.remove('hidden');
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Update unlock UI
                 btnUnlock.textContent = 'Activated';
-                btnUnlock.style.backgroundColor = 'var(--border-color)';
+                btnUnlock.style.background = 'var(--border-color)';
                 btnUnlock.style.color = 'var(--text-main)';
                 btnUnlock.setAttribute('disabled', 'true');
                 activationInput.setAttribute('disabled', 'true');
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }, 1000);
             } else {
-                unlockMessage.textContent = '❌ Invalid code. Must be "0x" followed by 6 digits.';
+                unlockMessage.textContent = '❌ Invalid code. Must be 6 digits.';
                 unlockMessage.classList.remove('hidden');
                 unlockMessage.style.color = '#ef4444'; // Red
             }

@@ -1085,3 +1085,40 @@ body.dark-mode .wa-mockup {
     transform: translateY(2px);
     border-bottom-width: 2px;
 }
+
+/* Gradient Unlock Button */
+#btn-unlock {
+  width: fit-content;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2em 1.5rem;
+  cursor: pointer;
+  gap: 0.4rem;
+  font-weight: bold;
+  border-radius: 30px;
+  text-shadow: 2px 2px 3px rgb(136 0 136 / 50%);
+  background: linear-gradient(15deg, #880088, #aa2068, #cc3f47, #de6f3d, #f09f33, #de6f3d, #cc3f47, #aa2068, #880088) no-repeat;
+  background-size: 300%;
+  color: #fff;
+  border: none;
+  background-position: left center;
+  box-shadow: 0 30px 10px -20px rgba(0,0,0,.2);
+  transition: background .3s ease;
+}
+
+#btn-unlock:hover {
+  background-size: 320%;
+  background-position: right center;
+}
+
+#btn-unlock:hover svg {
+  fill: #fff;
+}
+
+#btn-unlock svg {
+  width: 23px;
+  fill: #f09f33;
+  transition: .3s ease;
+}

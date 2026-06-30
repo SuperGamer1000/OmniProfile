@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="stylesheet" href="styles.css?v=6">
     <!-- Theme script runs early to prevent flash -->
     <script>
         if (localStorage.getItem('theme') === 'dark') {
@@ -377,7 +377,10 @@
                 <p class="text-md text-muted">To download high-quality mockups, please enter your activation code.</p>
                 <div class="premium-input-group mt-4" style="display: flex; flex-direction: column; gap: 10px;">
                     <input type="text" id="activation-code" placeholder="Enter code" style="padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-app); color: var(--text-main);">
-                    <button id="btn-unlock" class="btn-solid" style="background-color: #f59e0b; color: white;">Unlock Download</button>
+                    <button id="btn-unlock">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                        Unlock Download
+                    </button>
                 </div>
                 <p id="unlock-message" class="text-sm mt-3 hidden text-center"></p>
             </div>
